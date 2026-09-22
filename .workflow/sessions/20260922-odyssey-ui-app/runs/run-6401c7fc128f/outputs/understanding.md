@@ -88,3 +88,11 @@ Patterns extracted → sibling scan results:
 ## 7. Discover
 
 Triage: 2 actionable hits (raw `{section}` h2) → fixed + re-verified (typecheck/tests green). 14 hits classified safe (test fixtures). 5 hits safe (routing conditionals). `remaining_actionable == 0`, `cross_phase_loops = 0`.
+
+## 8. Learnings
+
+- **Theme binding pitfall**: never put literal `color`/`background` on `:root` beside theme vars — bind them (`color: var(--text)`), or every element without an explicit color silently inherits the wrong theme's value. This produced invisible headings in light theme.
+- **Bilingual discipline**: any user-visible string not routed through the dictionary drifts (nav sections, tool panels, confirm dialogs, theme enum). Internal IDs need a separate display-label map.
+- **State-class contract**: applying `className={level}` without per-variant CSS makes state invisible — class lists must be audited against the stylesheet, not just the markup.
+- **Fenced mutations need user-controllable generations**: hardcoding `expectedGeneration: 1` makes the action fail on any non-fresh resource; expose the fencing values as inputs with sensible defaults.
+- **Zero-cost delight**: `title` on disabled buttons explains *why*; Enter-to-submit on single-primary forms removes a click; `dateTime` + locale-aware `toLocaleTimeString` are one-line correctness wins.

@@ -6,7 +6,7 @@ import { Evidence } from "../common/Evidence";
 
 type T = ReturnType<typeof useI18n>["t"];
 
-export function FabricPanel({ section, profileId, workspaceId }: { section: string; profileId: string; workspaceId?: string }) {
+export function FabricPanel({ section, title, profileId, workspaceId }: { section: string; title?: string; profileId: string; workspaceId?: string }) {
   const { t } = useI18n();
   const tool = section.toLowerCase().replace(/s$/, "") as FabricTool;
   const [ids, setIds] = useState<Record<string, string>>({ ttl: "60000", paths: "hub,lan-direct", operationClass: "mcp-read", ...(workspaceId ? { workspaceId } : {}) });
@@ -40,7 +40,7 @@ export function FabricPanel({ section, profileId, workspaceId }: { section: stri
 
   if (!fields) return null;
   return <section className="panel">
-    <div className="panel-heading"><div><h2>{section}</h2><p>{fields.description}</p></div><button disabled={busy !== undefined} onClick={() => void run("list")}>{t("refreshInventory")}</button></div>
+    <div className="panel-heading"><div><h2>{title ?? section}</h2><p>{fields.description}</p></div><button disabled={busy !== undefined} onClick={() => void run("list")}>{t("refreshInventory")}</button></div>
     <div className="resource-form">{fields.inputs.map((field) => <label key={field.name}>{field.label}<input type={field.secret ? "password" : "text"} value={value(field.name)} onChange={(event) => set(field.name, event.target.value)} autoComplete="off" placeholder={field.placeholder} /></label>)}</div>
     <div className="action-row">{fields.actions.map((action) => <button key={action} disabled={busy !== undefined} onClick={() => void run(action)}>{busy === action ? t("working") : action}</button>)}</div>
     {error && <div className="error-box" role="alert">{error}</div>}

@@ -71,3 +71,20 @@ Delegate unavailable (W002) — polish + delight perspectives produced in-house 
 - `npm run build` — PASS (vite 266KB bundle).
 - **Browser verification** (chrome-devtools, vite dev :1421): light + dark themes render correctly; zh locale auto-detected; all chrome strings localized; workspaces panel shows new generation inputs, disabled-hint titles, in-flow error box, empty state.
 - **New finding during verify**: F20 — `:root` literal `color:#e9ebf2`/`background:#0d0f14` was never overridden by light themes; elements without explicit `color` (h1/h2/strong) rendered near-white on light canvas. Fixed by binding `color`/`background` to `var(--text)`/`var(--canvas)`. Dashboard metric label corrected (`desktopBridge`).
+
+## 6. Generalize
+
+Patterns extracted → sibling scan results:
+
+| Pattern | Layer | Hits | Disposition |
+|---------|-------|------|-------------|
+| Literal generation/revision in gateway calls | syntax | 14 | all test fixtures — safe |
+| `window.confirm("` hardcoded English | syntax | 0 | clean |
+| Raw enum/`{section}` rendered to user | syntax+semantic | 2 actionable | **fixed** (`title` prop) |
+| Async without try/catch | semantic | 0 residual | all covered |
+| className without CSS rules | structural | 0 residual | all styled |
+| :root literal colors not var-bound | structural | 0 residual | fixed |
+
+## 7. Discover
+
+Triage: 2 actionable hits (raw `{section}` h2) → fixed + re-verified (typecheck/tests green). 14 hits classified safe (test fixtures). 5 hits safe (routing conditionals). `remaining_actionable == 0`, `cross_phase_loops = 0`.

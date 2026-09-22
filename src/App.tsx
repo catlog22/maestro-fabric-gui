@@ -90,9 +90,9 @@ export function App() {
         </section>
         {section === "Overview" ? <Dashboard state={state} projection={projection} gatewayBusy={gatewayBusy} gatewayError={gatewayError} onGatewayAction={gatewayAction} onNavigate={setSection} />
           : section === "Activity" ? <ActivityPanel items={monitor.activity} degraded={monitor.degraded} gap={monitor.gap} controls={<MonitorControls profileId={selectedProfileId} cursor={monitor.cursor} onEvents={acceptEvents} onSnapshot={acceptSnapshot} />} />
-          : ["Devices", "Endpoints", "Routes"].includes(section) ? <FabricPanel section={section} profileId={selectedProfileId} workspaceId={selectedWorkspaceId} />
+          : ["Devices", "Endpoints", "Routes"].includes(section) ? <FabricPanel section={section} title={pageTitle} profileId={selectedProfileId} workspaceId={selectedWorkspaceId} />
           : section === "Workspaces" ? <WorkspaceTopologyPanel profileId={selectedProfileId} selectedId={selectedWorkspaceId} onSelect={setSelectedWorkspaceId} />
-          : ["Board", "Host", "Exec", "Jobs", "Files", "Sessions", "Todos", "Teammates", "Handoffs", "Skills", "Knowledge", "Browser"].includes(section) ? <GatewayToolsPanel section={section} profileId={selectedProfileId} workspaceId={selectedWorkspaceId} />
+          : ["Board", "Host", "Exec", "Jobs", "Files", "Sessions", "Todos", "Teammates", "Handoffs", "Skills", "Knowledge", "Browser"].includes(section) ? <GatewayToolsPanel section={section} title={pageTitle} profileId={selectedProfileId} workspaceId={selectedWorkspaceId} />
           : <GatewayPanel section={section} profileId={selectedProfileId} onProfileSelect={setSelectedProfileId} />}
       </main>
     </div>

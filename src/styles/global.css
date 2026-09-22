@@ -1,14 +1,15 @@
 :root {
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #e9ebf2; background: #0d0f14; font-synthesis: none; color-scheme: dark;
+  color: var(--text); background: var(--canvas); font-synthesis: none; color-scheme: dark;
   --canvas: #0d0f14; --structural: #12151c; --container: #191d27; --floating: #202532;
-  --text: #e9ebf2; --muted: #9299aa; --accent: #7775ff; --good: #51c98d; --danger: #f0707e;
-  --line: #282d3a; --radius: 12px;
+  --text: #e9ebf2; --muted: #9299aa; --accent: #7775ff; --good: #51c98d; --warn: #e0a34a; --danger: #f0707e;
+  --line: #282d3a; --radius: 12px; --shadow: 0 10px 28px rgb(0 0 0 / .35);
 }
 * { box-sizing: border-box; }
 html, body, #root { min-height: 100%; margin: 0; }
 button { font: inherit; }
 button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { color-scheme: light; --canvas:#f7f7f9; --structural:#eeeef2; --container:#fff; --floating:#fff; --text:#171820; --muted:#656b78; --line:#dfe1e8; } }
-:root[data-theme="light"] { color-scheme:light; --canvas:#f7f7f9; --structural:#eeeef2; --container:#fff; --floating:#fff; --text:#171820; --muted:#656b78; --line:#dfe1e8; }
-:root[data-theme="dark"] { color-scheme:dark; --canvas:#0d0f14; --structural:#12151c; --container:#191d27; --floating:#202532; --text:#e9ebf2; --muted:#9299aa; --line:#282d3a; }
+input:focus-visible { border-color: var(--accent); outline: none; box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent); }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) { color-scheme: light; --canvas:#f7f7f9; --structural:#eeeef2; --container:#fff; --floating:#fff; --text:#171820; --muted:#656b78; --warn:#a86b00; --danger:#cf3f52; --line:#dfe1e8; --shadow:0 10px 24px rgb(23 24 32 / .12); } }
+:root[data-theme="light"] { color-scheme:light; --canvas:#f7f7f9; --structural:#eeeef2; --container:#fff; --floating:#fff; --text:#171820; --muted:#656b78; --warn:#a86b00; --danger:#cf3f52; --line:#dfe1e8; --shadow:0 10px 24px rgb(23 24 32 / .12); }
+:root[data-theme="dark"] { color-scheme:dark; --canvas:#0d0f14; --structural:#12151c; --container:#191d27; --floating:#202532; --text:#e9ebf2; --muted:#9299aa; --warn:#e0a34a; --danger:#f0707e; --line:#282d3a; --shadow:0 10px 28px rgb(0 0 0 / .35); }

@@ -7,7 +7,7 @@ import { GatewayPanel } from "./features/gateway/GatewayPanel";
 import { GatewayToolsPanel } from "./features/gateway/GatewayToolsPanel";
 import { WorkspaceTopologyPanel } from "./features/workspace/WorkspaceTopologyPanel";
 import { desktopApi } from "./lib/desktop-api";
-import { LocaleProvider, type Locale, useI18n } from "./i18n";
+import { LocaleProvider, messages, type Locale } from "./i18n";
 import { acceptNewerState, initialDesktopState } from "./state/desktop-state";
 import type { DesktopState } from "./models/desktop";
 import { projectDesktop, type DesktopProjection } from "./models/projection";
@@ -65,8 +65,9 @@ export function App() {
   useEffect(() => { void connect(); }, []);
   useEffect(() => { document.documentElement.dataset.theme = theme; document.documentElement.lang = locale === "zh" ? "zh-CN" : "en"; }, [locale, theme]);
 
-  const label = useMemo(() => ({ Overview: t("overview"), Gateway: t("gateway"), Activity: t("activity"), Workspaces: t("workspaces") }), [t]);
+  const label = useMemo(() => ({ Overview: t("overview"), Gateway: t("gateway"), Activity: t("activity"), Workspaces: t("workspaces"), Connectors: t("secConnectors"), Board: t("secBoard"), Host: t("secHost"), Exec: t("secExec"), Jobs: t("secJobs"), Files: t("secFiles"), Sessions: t("secSessions"), Todos: t("secTodos"), Teammates: t("secTeammates"), Handoffs: t("secHandoffs"), Skills: t("secSkills"), Knowledge: t("secKnowledge"), Browser: t("secBrowser"), Devices: t("secDevices"), Endpoints: t("secEndpoints"), Routes: t("secRoutes"), Settings: t("secSettings") }), [t]);
   const pageTitle = label[section as keyof typeof label] ?? section;
+  const readinessLabel = state.readiness === "ready" ? t("readinessReady") : state.readiness === "starting" ? t("readinessStarting") : t("readinessUnavailable");
 
   return <LocaleProvider locale={locale}>
     <div className="shell">
@@ -75,10 +76,10 @@ export function App() {
         <nav aria-label={t("productSubtitle")}>
           {(["Overview", "Gateway", "Activity", "Workspaces"] as const).map((item) => <button key={item} className={section === item ? "nav-item active" : "nav-item"} aria-current={section === item ? "page" : undefined} onClick={() => setSection(item)}>{label[item]}</button>)}
           <button className={advancedOpen ? "nav-group expanded" : "nav-group"} aria-expanded={advancedOpen} onClick={() => setAdvancedOpen((value) => !value)}><span>{t("advanced")}</span><span aria-hidden="true">{advancedOpen ? "−" : "+"}</span></button>
-          {advancedOpen && <div className="advanced-list">{advancedSections.map((item) => <button key={item} className={section === item ? "nav-item active" : "nav-item"} onClick={() => setSection(item)}>{item}</button>)}</div>}
+          {advancedOpen && <div className="advanced-list">{advancedSections.map((item) => <button key={item} className={section === item ? "nav-item active" : "nav-item"} onClick={() => setSection(item)}>{label[item as keyof typeof label] ?? item}</button>)}</div>}
         </nav>
-        <div className="sidebar-settings"><button aria-label="Language" onClick={() => setLocale((value) => value === "en" ? "zh" : "en")}>{t("language")}</button><button aria-label="Theme" onClick={() => setTheme((value) => value === "system" ? "light" : value === "light" ? "dark" : "system")}>{theme}</button></div>
-        <div className={`connection ${state.readiness}`}><span className="status-dot" />{state.readiness}</div>
+        <div className="sidebar-settings"><button aria-label={t("languageLabel")} onClick={() => setLocale((value) => value === "en" ? "zh" : "en")}>{t("language")}</button><button aria-label={t("themeLabel")} onClick={() => setTheme((value) => value === "system" ? "light" : value === "light" ? "dark" : "system")}>{theme === "system" ? t("themeSystem") : theme === "light" ? t("themeLight") : t("themeDark")}</button></div>
+        <div className={`connection ${state.readiness}`}><span className="status-dot" />{readinessLabel}</div>
       </aside>
       <main>
         <header><div><p className="eyebrow">{t("eyebrow")}</p><h1>{pageTitle}</h1></div><button className="secondary" onClick={() => void connect()}>{t("refresh")}</button></header>
@@ -99,8 +100,7 @@ export function App() {
 }
 
 function useI18nSafe(locale: Locale) {
-  // The App renders the provider below its own shell, so use a tiny local dictionary for the shell.
-  const dictionaries = { en: { overview: "Overview", gateway: "Gateway", activity: "Logs & monitoring", workspaces: "Registered workspaces", advanced: "Advanced tools", product: "Maestro Gateway Console", productSubtitle: "Gateway operations", eyebrow: "GATEWAY OPERATIONS CONSOLE", language: "中文", refresh: "Refresh", tryAgain: "Try again", desktopReady: "Desktop bridge ready", desktopStarting: "Connecting to desktop bridge", desktopUnavailable: "Desktop bridge unavailable", establishChannel: "Establishing the local control channel." }, zh: { overview: "总览", gateway: "网关控制", activity: "日志与监控", workspaces: "注册空间", advanced: "高级工具", product: "Maestro 网关控制台", productSubtitle: "网关运维", eyebrow: "网关运维控制台", language: "English", refresh: "刷新", tryAgain: "重试", desktopReady: "桌面桥接已就绪", desktopStarting: "正在连接桌面桥接", desktopUnavailable: "桌面桥接不可用", establishChannel: "正在建立本地控制通道。" } } as const;
-  const dictionary = dictionaries[locale];
+  // The App renders the provider below its own shell, so it reads the shared dictionary directly.
+  const dictionary = messages[locale];
   return { t: <K extends keyof typeof dictionary>(key: K) => dictionary[key] };
 }

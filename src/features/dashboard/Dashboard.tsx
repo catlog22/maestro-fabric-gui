@@ -37,7 +37,7 @@ export function Dashboard({ state, projection, gatewayBusy, gatewayError, onGate
     </section>
 
     <section className="dashboard-grid compact-metrics">
-      <article className="metric primary"><span>{t("desktopReady")}</span><strong>{state.readiness}</strong><small>{state.bridge ? `Protocol v${state.bridge.protocolVersion}` : t("desktopUnavailable")}</small></article>
+      <article className="metric primary"><span>{t("desktopBridge")}</span><strong>{state.readiness === "ready" ? t("readinessReady") : state.readiness === "starting" ? t("readinessStarting") : t("readinessUnavailable")}</strong><small>{state.bridge ? `Protocol v${state.bridge.protocolVersion}` : t("desktopUnavailable")}</small></article>
       <article className="metric"><span>{t("workspaceCount")}</span><strong>{projection.workspaceCount}</strong><small>{t("registered")}</small></article>
       <article className="metric"><span>{t("liveLogs")}</span><strong>{projection.gateway === "ready" ? t("gatewayOnline") : t("gatewayOffline")}</strong><small>{projection.profileId}</small></article>
       <article className="metric"><span>Fabric</span><strong>{fabric?.devices.length ?? "—"}</strong><small>{fabric ? `${fabric.endpoints.length} endpoints · ${fabric.routes.length} routes` : "No snapshot"}</small></article>

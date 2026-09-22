@@ -63,3 +63,11 @@ Delegate unavailable (W002) — polish + delight perspectives produced in-house 
 - **T1 (high)**: F1, F2, F3, F8, F12
 - **T2 (medium)**: F4, F5, F6, F7, F9, F10, F11
 - **T3 (low + ideas)**: F13–F18, P8, P9, D1–D7
+
+## 5. Verify
+
+- `npm run typecheck` — PASS (app + bridge).
+- `npm test` — 39/39 vitest + 15/15 bridge.
+- `npm run build` — PASS (vite 266KB bundle).
+- **Browser verification** (chrome-devtools, vite dev :1421): light + dark themes render correctly; zh locale auto-detected; all chrome strings localized; workspaces panel shows new generation inputs, disabled-hint titles, in-flow error box, empty state.
+- **New finding during verify**: F20 — `:root` literal `color:#e9ebf2`/`background:#0d0f14` was never overridden by light themes; elements without explicit `color` (h1/h2/strong) rendered near-white on light canvas. Fixed by binding `color`/`background` to `var(--text)`/`var(--canvas)`. Dashboard metric label corrected (`desktopBridge`).

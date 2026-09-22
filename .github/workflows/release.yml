@@ -1,0 +1,84 @@
+name: release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Build ${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        platform:
+          - ubuntu-22.04
+          - windows-latest
+          - macos-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            curl \
+            file \
+            libayatana-appindicator3-dev \
+            libssl-dev \
+            libwebkit2gtk-4.1-dev \
+            libxdo-dev \
+            librsvg2-dev \
+            patchelf \
+            wget
+
+      - name: Install JavaScript dependencies
+        run: npm ci
+
+      - name: Verify release version
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: node scripts/verify-release-version.mjs
+
+      - name: Run release verification gate
+        run: |
+          npm run typecheck
+          npm test
+          npm run verify:package
+          cargo test --manifest-path src-tauri/Cargo.toml
+
+      - name: Build and publish installers
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tagName: ${{ github.ref_name }}
+          releaseName: Maestro Fabric GUI ${{ github.ref_name }}
+          releaseBody: |
+            Automated desktop release for ${{ github.ref_name }}.
+
+            Installers are built independently on Ubuntu, Windows, and macOS.
+          releaseDraft: true
+          prerelease: false

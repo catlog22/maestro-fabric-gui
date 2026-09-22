@@ -1,0 +1,2 @@
+{"ts":"2026-09-22T12:58:36Z","phase":"intake","type":"session","source":"odyssey-ui","content":"Session created: target=src/ (current app), mode=ui, -y auto_confirm; 6 dimensions enabled","note":"birth packet run-6401c7fc128f"}
+{"ts":"2026-09-22T12:58:36Z","phase":"intake","type":"knowledge","source":"maestro search/load","content":"Loaded spec:project:ui-conventions (empty skeleton) — no prior UI conventions recorded","note":"knowledge gate satisfied"}

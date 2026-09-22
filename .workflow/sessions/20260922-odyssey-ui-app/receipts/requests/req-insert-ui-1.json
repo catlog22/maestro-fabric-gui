@@ -1,0 +1,7 @@
+{
+  "schema_version": "request-receipt/2.0",
+  "request_id": "req-insert-ui-1",
+  "participant_id": "devin",
+  "payload_hash": "sha256:f400f3cc3efb25ecacf862be5df8c30f2bc7a2790adfa0a1b7fc940a6d991198",
+  "transition_receipt_ref": "receipts/transitions/000000000002-chain-req-insert-ui-1.json"
+}

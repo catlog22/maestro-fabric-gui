@@ -1,0 +1,7 @@
+{
+  "schema_version": "request-receipt/2.0",
+  "request_id": "req-next-ui-1",
+  "participant_id": "devin",
+  "payload_hash": "sha256:3ae2757821229a719f85b074252f799875462c228e9b2ff1b70ab11231685484",
+  "transition_receipt_ref": "receipts/transitions/000000000003-tr_4bf3308f-bc48-40ec-8667-fd3cf8fa387f.json"
+}

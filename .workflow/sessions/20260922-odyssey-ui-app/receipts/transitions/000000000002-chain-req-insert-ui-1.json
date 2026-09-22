@@ -1,0 +1,36 @@
+{
+  "schema_version": "transition-receipt/2.0",
+  "transition_id": "chain-req-insert-ui-1",
+  "request_id": "req-insert-ui-1",
+  "session_id": "20260922-odyssey-ui-app",
+  "activity_revision": 2,
+  "target_type": "orchestration",
+  "target_id": "20260922-odyssey-ui-app",
+  "revision_before": 1,
+  "revision_after": 2,
+  "actor_id": "devin",
+  "participant_id": "devin",
+  "reason": "insert ui odyssey step",
+  "evidence_refs": [],
+  "recorded_at": "2026-09-22T12:58:42.944Z",
+  "result": {
+    "kind": "insert",
+    "chain": [
+      {
+        "step_id": "step-ui-1",
+        "command": "odyssey-ui",
+        "args": [
+          "深入优化 当前app 界面 ，交互逻辑",
+          "--mode ui",
+          "-y"
+        ],
+        "status": "pending",
+        "run_ids": [],
+        "goal_ref": null,
+        "decision_ref": null,
+        "decision_refs": [],
+        "stage": null
+      }
+    ]
+  }
+}

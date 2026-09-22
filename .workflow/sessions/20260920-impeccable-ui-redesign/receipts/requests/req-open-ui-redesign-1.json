@@ -1,0 +1,7 @@
+{
+  "schema_version": "request-receipt/2.0",
+  "request_id": "req-open-ui-redesign-1",
+  "participant_id": "devin",
+  "payload_hash": "sha256:3a6ac9dd8a09ce0cc19996e30156dae070ee57d9b74040c4114aa635a01b5b06",
+  "transition_receipt_ref": "receipts/transitions/000000000001-open-req-open-ui-redesign-1.json"
+}

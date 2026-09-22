@@ -1,0 +1,151 @@
+{
+  "title": "Choose the visual world",
+  "question": "The roll assigned the mainframe operator-console direction. Keep it, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "Operator Console",
+      "kicker": "THE ROLL",
+      "lineage": "1965-78 mainframe operator consoles and their engraved panel documentation",
+      "thesis": "The console as supervised machinery: every gateway action an engraved guarded control, every event a teleprinter line, every fence a register readout.",
+      "palette": ["#1E2126", "#EFE9DC", "#A8A292", "#C4634A", "#C99A4B", "#7AA87B"],
+      "materials": ["engraved caps labels", "register readouts", "teleprinter feed", "guarded toggles", "signal lamps"],
+      "viewport": "An engraved control spine replaces the sidebar; readiness becomes a lamp-and-register strip; the hero is a labeled control panel with guarded actions; logs render as a teleprinter feed.",
+      "case": "Assigned by the roll and carries the product's own grammar: fixed action registry as engraved controls, fencing (revision/generation/cursor) as registers, sanitized log as teleprinter output.",
+      "risk": "Reads as costume if the panel language is applied decoratively instead of carrying real state.",
+      "raised": [
+        { "from": "challenger-civic-bureau", "raise": "Total color discipline: saturation is spent only on state lamps; the rest of the surface is achromatic ink and hairlines." },
+        { "from": "challenger-cloud-edge", "raise": "Signal color lives in lamp glyphs and hairline edges as points, never as fills or washes." },
+        { "from": "challenger-gravity-rain", "raise": "One semantic color equals one state family, fixed in a legend and never reused decoratively." },
+        { "from": "challenger-font-specimen", "raise": "Values set in true tabular mono at instrument contrast; hierarchy by scale contrast, not weight stacking." }
+      ],
+      "wireframe": { "cols": 12, "rows": 10, "regions": [
+        { "label": "control spine", "x": 0, "y": 0, "w": 3, "h": 10, "accent": true },
+        { "label": "lamp status strip", "x": 3, "y": 0, "w": 9, "h": 2 },
+        { "label": "control panel", "x": 3, "y": 2, "w": 9, "h": 3 },
+        { "label": "teleprinter feed", "x": 3, "y": 5, "w": 9, "h": 5 }
+      ]},
+      "comp": ".impeccable/mocks/decision/assigned.webp"
+    },
+    {
+      "id": "pick",
+      "label": "Supervisor Board",
+      "kicker": "IMPECCABLE'S PICK",
+      "lineage": "k9s, htop and pm2-grade operations TUIs",
+      "thesis": "The developer's daily vocabulary: dense tabular rows, column-aligned values, severity color, zero chrome.",
+      "palette": ["#0E1116", "#D8DEE9", "#7C8A99", "#A3BE8C", "#EBCB8B", "#BF616A"],
+      "materials": ["columnar tables", "severity chips", "mono data", "key hints"],
+      "viewport": "The whole console as one supervisor board: sidebar becomes a process tree, status a table header, every panel a dense aligned table.",
+      "case": "Strongest audience identification of the grounded set and trivially carries the data; it just lacks a grammar for guarded action and registry ceremony.",
+      "risk": "The familiar landing — it is what every ops TUI already looks like; lowest novelty ceiling.",
+      "wireframe": { "cols": 12, "rows": 10, "regions": [
+        { "label": "process tree", "x": 0, "y": 0, "w": 3, "h": 10 },
+        { "label": "board header", "x": 3, "y": 0, "w": 9, "h": 2, "accent": true },
+        { "label": "metric table", "x": 3, "y": 2, "w": 9, "h": 3 },
+        { "label": "event table", "x": 3, "y": 5, "w": 9, "h": 5 }
+      ]},
+      "comp": ".impeccable/mocks/decision/pick.webp"
+    },
+    {
+      "id": "challenger-boarding-pass",
+      "label": "Gate Board",
+      "verdict": "competitive",
+      "lineage": "segmented boarding passes and live departure boards",
+      "thesis": "State as a ranked board: rows rerank in place and a changed state stays lit until noticed.",
+      "palette": ["#F4F2EC", "#1B1F24", "#D9772B", "#8A8F98"],
+      "materials": ["segmented pass blocks", "tabular figures", "split-flap rerank", "scannable mono block"],
+      "viewport": "Dashboard as a departure board: gateway state, workspaces and bindings as ranked rows that rerank and hold their change highlight.",
+      "case": "Fuses strongly on data truth — log and workspace tables as a live board — but a board has no grammar for guarded actions or the fixed action registry.",
+      "risk": "Reads as travel ephemera once the panel vocabulary is missing.",
+      "wireframe": { "cols": 12, "rows": 10, "regions": [
+        { "label": "gate selector", "x": 0, "y": 0, "w": 2, "h": 10 },
+        { "label": "departure board", "x": 2, "y": 0, "w": 10, "h": 7, "accent": true },
+        { "label": "segmented pass", "x": 2, "y": 7, "w": 10, "h": 3 }
+      ]},
+      "hero": "https://impeccable.style/worlds/cards/vernacular-ephemera-boarding-pass-and-gate-board-hero.webp",
+      "comp": ".impeccable/mocks/decision/challenger-boarding-pass.webp"
+    },
+    {
+      "id": "challenger-nixie",
+      "label": "Nixie Counter",
+      "verdict": "competitive",
+      "lineage": "nixie-tube laboratory counters on blackened steel",
+      "thesis": "Quantities are the interface: every metric a glowing digit bank, every label engraved caps on the chassis.",
+      "palette": ["#17181B", "#FF8C2E", "#6B6E73", "#3A3D42"],
+      "materials": ["glass digit tubes", "anode mesh grey", "engraved caps", "cross-fade digit changes"],
+      "viewport": "Metrics as glowing digit banks across the top; panels as engraved chassis sections with tube readouts for revisions, generations, cursors.",
+      "case": "Wins raw identification — nixie is a maker icon — and owns the readout layer; a counter grammar cannot carry logs, tables, or the action registry.",
+      "risk": "Glow-as-decoration when the digit layer is not literally the data.",
+      "wireframe": { "cols": 12, "rows": 10, "regions": [
+        { "label": "nav rail", "x": 0, "y": 0, "w": 2, "h": 10 },
+        { "label": "nixie bank", "x": 2, "y": 0, "w": 10, "h": 4, "accent": true },
+        { "label": "engraved chassis", "x": 2, "y": 4, "w": 10, "h": 6 }
+      ]},
+      "hero": "https://impeccable.style/worlds/cards/signals-instruments-nixie-laboratory-counter-hero.webp",
+      "comp": ".impeccable/mocks/decision/challenger-nixie.webp"
+    },
+    {
+      "id": "challenger-civic-bureau",
+      "label": "Civic Prospectus",
+      "verdict": "declined",
+      "lineage": "late-modern civic bureau prospectuses",
+      "palette": ["#F7F7FA", "#1B1547", "#6B5CE7"],
+      "materials": ["bone-white plate", "rendered ribbon", "hairline rules"],
+      "case": "Fuses poorly: a marketing grammar cannot carry operator state; devs do not identify with council prospectuses.",
+      "kept": "Total color discipline — the whole surface spends its saturation on one element.",
+      "hero": "https://impeccable.style/worlds/cards/civic-bureau-prospectus-late-modern-hero.webp"
+    },
+    {
+      "id": "challenger-cloud-edge",
+      "label": "Cloud Edge",
+      "verdict": "declined",
+      "lineage": "iridescent diffraction fringes on cloud borders",
+      "palette": ["#FFFFFF", "#5B6470", "#A8E6CF", "#C9B8F0"],
+      "materials": ["spectral hairline bands", "achromatic field"],
+      "case": "Fuses poorly: pastel optics have no operational semantics and no audience identification.",
+      "kept": "Signal color confined to edges and points; the field stays achromatic.",
+      "hero": "https://impeccable.style/worlds/cards/clouds-storms-auroras-iridescent-cloud-edge-hero.webp"
+    },
+    {
+      "id": "challenger-gravity-rain",
+      "label": "Gravity Garden",
+      "verdict": "declined",
+      "lineage": "surreal garden of per-cloud gravities",
+      "palette": ["#3D4A44", "#7FB3D5", "#D57F7F", "#E8E6DF"],
+      "materials": ["color-coded force fields", "bending baselines"],
+      "case": "Fuses poorly: impossible physics reads as whimsy against supervised-infrastructure truth.",
+      "kept": "Every color bound to exactly one meaning; the legend never competes with the field.",
+      "hero": "https://impeccable.style/worlds/cards/dream-surreal-impossible-worlds-gravity-rain-garden-hero.webp"
+    },
+    {
+      "id": "challenger-font-specimen",
+      "label": "Variable Specimen",
+      "verdict": "declined",
+      "lineage": "interactive variable-font specimens",
+      "palette": ["#FAF9F6", "#141414", "#B33A2B"],
+      "materials": ["giant glyphs", "mono coordinate readouts", "baseline grid"],
+      "case": "Fuses poorly: a specimen is a demonstration object, not an operations surface.",
+      "kept": "Hierarchy by scale contrast alone; mono readouts as instrument labels.",
+      "hero": "https://impeccable.style/worlds/cards/variable-font-specimen-hero.webp"
+    }
+  ],
+  "reroll": { "registers": ["safer", "bolder"] },
+  "canon": true,
+  "canonCard": {
+    "label": "Modern Dev Console",
+    "thesis": "The Linear/VS Code-grade dark sidebar app this category already ships, executed impeccably.",
+    "palette": ["#0F1115", "#E8EAF0", "#5B6CF0", "#3E4452"],
+    "materials": ["clean grid", "muted surfaces", "single accent"],
+    "viewport": "The arrangement a visitor expects — left nav, header, card grid — at full craft.",
+    "risk": "Indistinguishable from every other dev console by design.",
+    "wireframe": { "cols": 12, "rows": 10, "regions": [
+      { "label": "sidebar", "x": 0, "y": 0, "w": 3, "h": 10 },
+      { "label": "header", "x": 3, "y": 0, "w": 9, "h": 1 },
+      { "label": "hero card", "x": 3, "y": 1, "w": 9, "h": 4, "accent": true },
+      { "label": "card grid", "x": 3, "y": 5, "w": 9, "h": 5 }
+    ]},
+    "comp": ".impeccable/mocks/decision/canon.webp"
+  },
+  "buildPath": { "value": "code", "toggle": false },
+  "steer": true
+}

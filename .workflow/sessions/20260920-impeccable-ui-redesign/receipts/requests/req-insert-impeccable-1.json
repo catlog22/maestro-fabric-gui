@@ -1,0 +1,7 @@
+{
+  "schema_version": "request-receipt/2.0",
+  "request_id": "req-insert-impeccable-1",
+  "participant_id": "devin",
+  "payload_hash": "sha256:58c64285b542fe5e251d1c60e3ba02ac0932f430fe63c76b4c1e26dd9d060367",
+  "transition_receipt_ref": "receipts/transitions/000000000002-chain-req-insert-impeccable-1.json"
+}

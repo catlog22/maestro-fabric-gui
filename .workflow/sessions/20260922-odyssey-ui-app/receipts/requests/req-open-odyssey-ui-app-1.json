@@ -1,0 +1,7 @@
+{
+  "schema_version": "request-receipt/2.0",
+  "request_id": "req-open-odyssey-ui-app-1",
+  "participant_id": "devin",
+  "payload_hash": "sha256:2315025439e1bda156cca8baec1aa579f0d54ca0ec9425b8047812a05ee2623f",
+  "transition_receipt_ref": "receipts/transitions/000000000001-open-req-open-odyssey-ui-app-1.json"
+}

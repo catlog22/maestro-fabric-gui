@@ -1,0 +1,7 @@
+{
+  "schema_version": "request-receipt/2.0",
+  "request_id": "req-next-impeccable-1",
+  "participant_id": "devin",
+  "payload_hash": "sha256:e57f56b0f7690e2350b35e585510a5a814e63e26068f0a5c63cb27b356fc5ca3",
+  "transition_receipt_ref": "receipts/transitions/000000000003-tr_9fee734f-1be2-4986-a836-53dcc7ef8798.json"
+}

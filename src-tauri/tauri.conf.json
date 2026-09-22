@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Maestro Fabric GUI",
+  "version": "0.1.0",
+  "identifier": "dev.maestro.fabric-gui",
+  "build": {
+    "beforeDevCommand": "npm run dev:tauri",
+    "devUrl": "http://127.0.0.1:1421",
+    "beforeBuildCommand": "npm run build",
+    "frontendDist": "../dist"
+  },
+  "app": {
+    "windows": [{ "label": "main", "title": "Maestro Fabric GUI", "width": 1200, "height": 780, "minWidth": 720, "minHeight": 560 }],
+    "security": { "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src ipc: http://ipc.localhost http://127.0.0.1:1421 ws://127.0.0.1:1421 http://localhost:1421 ws://localhost:1421" }
+  },
+  "bundle": { "active": true, "targets": "all", "icon": ["icons/icon.ico"], "resources": ["../bridge/dist/*"] }
+}

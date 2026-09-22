@@ -1,0 +1,10 @@
+node_modules/
+dist/
+bridge/dist/
+src-tauri/target/
+*.tsbuildinfo
+*.log
+.env
+.env.*
+!.env.example
+.DS_Store

@@ -50,3 +50,16 @@ Severity matrix (18 findings; dims = visual_hierarchy / interaction_states / acc
 | F18 | low | micro | no loading affordance beyond text; static status-dot | app.css:11 |
 
 Distribution: 0C / 4H / 8M / 6L. All 6 dimensions audited; delegate cross-check pending (claude, background).
+
+## 4. Diverge
+
+Delegate unavailable (W002) — polish + delight perspectives produced in-house over full source.
+
+**Polish**: input focus rings (P1); transition transform/border on interactives (P2); workspace-row hover + selected accent bar (P3); severity-colored activity rows (P4); status-dot pulse while connecting (P5); ellipsis truncation + `title` (P6); hero error in normal flow (P7); animated working indicator (P8); card hover elevation (P9).
+
+**Delight**: dashboard cards stagger-in (D1); copy-to-clipboard on evidence blocks (D2); `title` hints on disabled buttons (D3); locale-aware time format (D4); localized theme toggle w/ icon (D5); Enter-submit forms (D6); readiness banner de-emphasized when healthy (D7).
+
+**Consolidated priority list** (severity × impact × effort):
+- **T1 (high)**: F1, F2, F3, F8, F12
+- **T2 (medium)**: F4, F5, F6, F7, F9, F10, F11
+- **T3 (low + ideas)**: F13–F18, P8, P9, D1–D7

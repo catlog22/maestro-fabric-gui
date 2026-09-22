@@ -1,7 +1,53 @@
 {
   "version": 3,
-  "generatedAt": 1790082344640,
+  "generatedAt": 1790082583514,
   "entries": [
+    {
+      "id": "cc-session-34896e38-6434-4c8d-8f8a-ad4b49670242",
+      "type": "note",
+      "title": "Claude session 34896e38",
+      "summary": "# Analysis Mode Protocol ## Mode Definition **Mode**: `analysis` (READ-ONLY) ## Prompt Structure ``` PURPOSE: [development goal] TASK: [specific implementation task] MODE: [auto|write] CONTEXT: [file ",
+      "tags": [
+        "session",
+        "claude",
+        "D--maestro-fabric-gui",
+        "master"
+      ],
+      "status": "completed",
+      "created": "2026-09-22T13:07:07.193Z",
+      "updated": "2026-09-22T13:07:24.276Z",
+      "scope": null,
+      "category": "session",
+      "specCategory": null,
+      "createdBy": "session-indexer",
+      "sourceRef": "34896e38-6434-4c8d-8f8a-ad4b49670242",
+      "parent": null,
+      "related": [],
+      "repoId": null
+    },
+    {
+      "id": "cc-session-c926c92d-b8c1-4284-b2fa-f1e652f64a87",
+      "type": "note",
+      "title": "Claude session c926c92d",
+      "summary": "# Analysis Mode Protocol ## Mode Definition **Mode**: `analysis` (READ-ONLY) ## Prompt Structure ``` PURPOSE: [development goal] TASK: [specific implementation task] MODE: [auto|write] CONTEXT: [file ",
+      "tags": [
+        "session",
+        "claude",
+        "D--maestro-fabric-gui",
+        "master"
+      ],
+      "status": "completed",
+      "created": "2026-09-22T13:08:17.691Z",
+      "updated": "2026-09-22T13:08:23.837Z",
+      "scope": null,
+      "category": "session",
+      "specCategory": null,
+      "createdBy": "session-indexer",
+      "sourceRef": "c926c92d-b8c1-4284-b2fa-f1e652f64a87",
+      "parent": null,
+      "related": [],
+      "repoId": null
+    },
     {
       "id": "knowhow-rcp-20260920-github-actions-tauri",
       "type": "knowhow",

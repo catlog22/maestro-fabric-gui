@@ -10,18 +10,20 @@ import { desktopApi } from "./lib/desktop-api";
 import { LocaleProvider, messages, type Locale } from "./i18n";
 import { acceptNewerState, initialDesktopState } from "./state/desktop-state";
 import type { DesktopState } from "./models/desktop";
+import type { GatewayRuntimeState } from "./models/gateway";
 import { projectDesktop, type DesktopProjection } from "./models/projection";
 import { initialMonitorState, markResynchronized, reduceMonitor, type MonitorEvent } from "./state/monitor-state";
 import "./styles/app.css";
 
-const advancedSections = ["Connectors", "Board", "Host", "Exec", "Jobs", "Files", "Sessions", "Todos", "Teammates", "Handoffs", "Skills", "Knowledge", "Browser", "Devices", "Endpoints", "Routes", "Settings"];
+const advancedSections = ["Board", "Host", "Exec", "Jobs", "Files", "Sessions", "Todos", "Teammates", "Handoffs", "Skills", "Knowledge", "Browser", "Devices", "Endpoints", "Routes", "Settings"];
 
 export function App() {
   const [state, setState] = useState<DesktopState>(initialDesktopState);
   const [section, setSection] = useState("Overview");
   const [advancedOpen, setAdvancedOpen] = useState(false);
-  const [selectedProfileId, setSelectedProfileId] = useState("remote");
+  const [selectedProfileId, setSelectedProfileId] = useState("local");
   const [selectedWorkspaceId, setSelectedWorkspaceId] = useState<string>();
+  const [runtimeState, setRuntimeState] = useState<GatewayRuntimeState>();
   const [monitor, setMonitor] = useState(initialMonitorState);
   const [projection, setProjection] = useState<DesktopProjection>(() => projectDesktop(selectedProfileId, {}));
   const [locale, setLocale] = useState<Locale>(() => navigator.language.toLowerCase().startsWith("zh") ? "zh" : "en");
@@ -35,26 +37,38 @@ export function App() {
     const root = snapshot && typeof snapshot === "object" ? snapshot as Record<string, unknown> : {};
     const data = root.data && typeof root.data === "object" ? root.data as Record<string, unknown> : root;
     const fabric = data.fabric ?? data.snapshot;
-    setProjection(projectDesktop(selectedProfileId, { fabric, workspaces: data.workspaces }));
+    setProjection((value) => projectDesktop(selectedProfileId, { gateway: runtimeState, fabric, workspaces: data.workspaces }, value.revision + 1));
     setMonitor((value) => markResynchronized(value));
-  }, [selectedProfileId]);
+  }, [runtimeState, selectedProfileId]);
 
   async function connect() {
     setState((value) => ({ ...value, readiness: "starting", error: undefined }));
     try {
-      const next = await desktopApi.handshake();
+      const [next, gateway] = await Promise.all([desktopApi.handshake(), desktopApi.getGatewayRuntimeState()]);
       setState((value) => acceptNewerState(value, next));
+      acceptRuntimeState(gateway);
     } catch (error) {
       setState((value) => ({ ...value, revision: value.revision + 1, readiness: "unavailable", error: { code: "desktop_unavailable", message: error instanceof Error ? error.message : "Desktop bridge is unavailable", retryable: true } }));
     }
   }
 
+  function acceptRuntimeState(next: GatewayRuntimeState) {
+    setRuntimeState(next);
+    const gateway = next.status === "running" ? "ready" : next.status === "stopped" ? "offline" : next.status === "starting" || next.status === "failed" ? "degraded" : "unknown";
+    setProjection((value) => ({ ...value, profileId: selectedProfileId, revision: value.revision + 1, gateway, tunnelCount: next.tunnelKind === "none" ? 0 : 1 }));
+  }
+
   async function gatewayAction(action: string) {
+    const activatesTunnel = (action === "start" || action === "restart") && runtimeState?.tunnelKind !== "none";
+    const actionLabel = action === "restart" ? t("restartGateway") : t("startGateway");
+    if (activatesTunnel && !window.confirm(t("confirmGatewayTunnelAction").replace("{action}", actionLabel))) return;
     setGatewayBusy(action);
     setGatewayError(undefined);
     try {
-      await desktopApi.gatewayControl(action, {}, 120_000);
-      setProjection((value) => ({ ...value, gateway: action === "stop" ? "offline" : "ready" }));
+      const next = action === "start" ? await desktopApi.startGatewayRuntime()
+        : action === "stop" ? await desktopApi.stopGatewayRuntime()
+          : await desktopApi.restartGatewayRuntime();
+      acceptRuntimeState(next);
     } catch (error) {
       setGatewayError(error instanceof Error ? error.message : String(error));
     } finally {
@@ -65,9 +79,13 @@ export function App() {
   useEffect(() => { void connect(); }, []);
   useEffect(() => { document.documentElement.dataset.theme = theme; document.documentElement.lang = locale === "zh" ? "zh-CN" : "en"; }, [locale, theme]);
 
-  const label = useMemo(() => ({ Overview: t("overview"), Gateway: t("gateway"), Activity: t("activity"), Workspaces: t("workspaces"), Connectors: t("secConnectors"), Board: t("secBoard"), Host: t("secHost"), Exec: t("secExec"), Jobs: t("secJobs"), Files: t("secFiles"), Sessions: t("secSessions"), Todos: t("secTodos"), Teammates: t("secTeammates"), Handoffs: t("secHandoffs"), Skills: t("secSkills"), Knowledge: t("secKnowledge"), Browser: t("secBrowser"), Devices: t("secDevices"), Endpoints: t("secEndpoints"), Routes: t("secRoutes"), Settings: t("secSettings") }), [t]);
+  const label = useMemo(() => ({ Overview: t("overview"), Gateway: t("gateway"), Activity: t("activity"), Workspaces: t("workspaces"), Board: t("secBoard"), Host: t("secHost"), Exec: t("secExec"), Jobs: t("secJobs"), Files: t("secFiles"), Sessions: t("secSessions"), Todos: t("secTodos"), Teammates: t("secTeammates"), Handoffs: t("secHandoffs"), Skills: t("secSkills"), Knowledge: t("secKnowledge"), Browser: t("secBrowser"), Devices: t("secDevices"), Endpoints: t("secEndpoints"), Routes: t("secRoutes"), Settings: t("secSettings") }), [t]);
   const pageTitle = label[section as keyof typeof label] ?? section;
   const readinessLabel = state.readiness === "ready" ? t("readinessReady") : state.readiness === "starting" ? t("readinessStarting") : t("readinessUnavailable");
+  const gatewayCompatibility = state.bridge?.gatewayCompatibility;
+  const gatewayCompatibilityLabel = gatewayCompatibility
+    ? ` · Gateway ${gatewayCompatibility.version ?? t("gatewayVersionUnavailable")} (${gatewayCompatibility.compatible ? t("gatewayVersionCompatible") : t("gatewayVersionRequires").replace("{version}", gatewayCompatibility.minimumVersion)})`
+    : "";
 
   return <LocaleProvider locale={locale}>
     <div className="shell">
@@ -85,15 +103,17 @@ export function App() {
         <header><div><p className="eyebrow">{t("eyebrow")}</p><h1>{pageTitle}</h1></div><button className="secondary" onClick={() => void connect()}>{t("refresh")}</button></header>
         <section className={`readiness ${state.readiness}`} role="status" aria-live="polite">
           <div><span className="status-dot" /><strong>{state.readiness === "ready" ? t("desktopReady") : state.readiness === "starting" ? t("desktopStarting") : t("desktopUnavailable")}</strong></div>
-          <p>{state.bridge ? `Protocol v${state.bridge.protocolVersion} · Node ${state.bridge.nodeVersion}` : state.error?.message ?? t("establishChannel")}</p>
+          <p>{state.bridge ? `Protocol v${state.bridge.protocolVersion} · Node ${state.bridge.nodeVersion}${gatewayCompatibilityLabel}` : state.error?.message ?? t("establishChannel")}</p>
           {state.error?.retryable && <button onClick={() => void connect()}>{t("tryAgain")}</button>}
         </section>
         {section === "Overview" ? <Dashboard state={state} projection={projection} gatewayBusy={gatewayBusy} gatewayError={gatewayError} onGatewayAction={gatewayAction} onNavigate={setSection} />
           : section === "Activity" ? <ActivityPanel items={monitor.activity} degraded={monitor.degraded} gap={monitor.gap} controls={<MonitorControls profileId={selectedProfileId} cursor={monitor.cursor} onEvents={acceptEvents} onSnapshot={acceptSnapshot} />} />
-          : ["Devices", "Endpoints", "Routes"].includes(section) ? <FabricPanel section={section} title={pageTitle} profileId={selectedProfileId} workspaceId={selectedWorkspaceId} />
+          : ["Devices", "Endpoints", "Routes"].includes(section) ? selectedProfileId === "local" && runtimeState?.fabricEnabled === false
+            ? <section className="panel"><div className="panel-heading"><div><h2>{pageTitle}</h2><p>{t("localFabricUnavailable")}</p></div></div></section>
+            : <FabricPanel section={section} title={pageTitle} profileId={selectedProfileId} workspaceId={selectedWorkspaceId} />
           : section === "Workspaces" ? <WorkspaceTopologyPanel profileId={selectedProfileId} selectedId={selectedWorkspaceId} onSelect={setSelectedWorkspaceId} />
           : ["Board", "Host", "Exec", "Jobs", "Files", "Sessions", "Todos", "Teammates", "Handoffs", "Skills", "Knowledge", "Browser"].includes(section) ? <GatewayToolsPanel section={section} title={pageTitle} profileId={selectedProfileId} workspaceId={selectedWorkspaceId} />
-          : <GatewayPanel section={section} profileId={selectedProfileId} onProfileSelect={setSelectedProfileId} />}
+          : <GatewayPanel section={section} profileId={selectedProfileId} onProfileSelect={setSelectedProfileId} onRuntimeState={acceptRuntimeState} />}
       </main>
     </div>
   </LocaleProvider>;

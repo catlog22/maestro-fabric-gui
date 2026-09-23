@@ -14,7 +14,7 @@ This application is a focused **Maestro Gateway Console**. Its primary jobs are:
 Advanced Fabric and Gateway tools remain available under the collapsed **Advanced tools** section, but they are intentionally secondary to the Gateway operations workflow.
 
 - Gateway profiles with independent connection generations and capability manifests.
-- Local Gateway lifecycle, pairing, connector, tunnel and workspace registry controls.
+- Local Gateway lifecycle, pairing, tunnel and workspace registry controls.
 - Three-layer workspace topology: authorized workspace, local registry workspace, Fabric binding.
 - Typed Gateway pages for Board, Host, Exec, Job, File, Session, Monitor, Todo, Teammate, Handoff, Skill, Maestro CLI and Browser.
 - Fabric Device, Workspace, Endpoint and Route control with revision/generation fencing.
@@ -23,9 +23,13 @@ Advanced Fabric and Gateway tools remain available under the collapsed **Advance
 
 ## Security model
 
-The React WebView never receives owner tokens, bearer tokens, pairing secrets or route proofs. Tauri resolves a credential reference through the OS credential store and injects the secret only into the supervised bridge request. The bridge has a fixed action/tool registry: it does not expose arbitrary shell commands, arbitrary files, or arbitrary MCP tool names. Remote Gateway URLs must use HTTPS; only loopback may use HTTP.
+The React WebView never receives owner tokens, bearer tokens, pairing secrets or route proofs. Tauri resolves credential references through the OS credential store and injects secrets only into supervised native operations. The GUI-owned local Gateway bearer is written to a user-private runtime configuration only while that owned process is running; the file is removed on stop, startup failure and application exit, and the next launch removes any stale copy left by a forced termination before autostart. The bridge has a fixed action/tool registry: it does not expose arbitrary shell commands, arbitrary files, or arbitrary MCP tool names. Remote Gateway URLs must use HTTPS; only loopback may use HTTP.
 
 High-risk actions such as `exec`, file mutation, browser `run`, knowledge staging, tunnel changes and destructive Fabric actions require explicit UI confirmation and remain subject to Gateway scopes. Revision/generation conflicts are reported and never replayed automatically.
+
+## Installed app requirements
+
+The desktop app controls an existing Maestro developer environment rather than bundling its runtimes. Install Node.js 22 or newer and make `node` available on `PATH` (or set `MAESTRO_FABRIC_NODE_BIN`). Local Gateway lifecycle controls also require `pi-maestro-gateway` 0.31.3 or newer on `PATH`, or an absolute executable path in `PI_MAESTRO_GATEWAY_BIN`.
 
 ## Workspace model
 

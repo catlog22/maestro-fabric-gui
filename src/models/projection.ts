@@ -12,4 +12,11 @@ export function parseFabricSnapshot(value:unknown):FabricProjection|undefined {
  const items=arrays.flat(); if(items.length>100||input.itemCount!==items.length)return undefined; const clean=arrays.map((items:unknown[])=>items.map((item:unknown)=>record(item)).filter((item):item is Record<string,unknown>=>item!==undefined));
  return{sourceId,revision,capturedAt,truncated:input.truncated,connectors:clean[0]!,devices:clean[1]!,endpoints:clean[2]!,routes:clean[3]!};
 }
-export function projectDesktop(profileId:string, input:{gateway?:unknown;workspaces?:unknown;fabric?:unknown}, revision=0):DesktopProjection{const fabric=parseFabricSnapshot(input.fabric);return{profileId,revision,gateway:input.gateway===undefined?"unknown":"ready",workspaceCount:Array.isArray(input.workspaces)?input.workspaces.length:0,connectorCount:fabric?.connectors.length??0,tunnelCount:0,fabric};}
+function gatewayHealth(value: unknown): DesktopProjection["gateway"] {
+ const status=record(value)?.status;
+ if(status==="running")return "ready";
+ if(status==="failed"||status==="starting")return "degraded";
+ if(status==="stopped")return "offline";
+ return "unknown";
+}
+export function projectDesktop(profileId:string, input:{gateway?:unknown;workspaces?:unknown;fabric?:unknown;tunnel?:unknown}, revision=0):DesktopProjection{const fabric=parseFabricSnapshot(input.fabric);const tunnel=record(input.tunnel);return{profileId,revision,gateway:gatewayHealth(input.gateway),workspaceCount:Array.isArray(input.workspaces)?input.workspaces.length:0,connectorCount:fabric?.connectors.length??0,tunnelCount:tunnel?.kind&&tunnel.kind!=="none"?1:0,fabric};}

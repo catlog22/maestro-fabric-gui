@@ -13,5 +13,5 @@
     "windows": [{ "label": "main", "title": "Maestro Fabric GUI", "width": 1200, "height": 780, "minWidth": 720, "minHeight": 560 }],
     "security": { "csp": "default-src 'self'; style-src 'self' 'unsafe-inline'; connect-src ipc: http://ipc.localhost http://127.0.0.1:1421 ws://127.0.0.1:1421 http://localhost:1421 ws://localhost:1421" }
   },
-  "bundle": { "active": true, "targets": "all", "icon": ["icons/icon.ico"], "resources": ["../bridge/dist/*"] }
+  "bundle": { "active": true, "targets": "all", "icon": ["icons/icon.ico"], "resources": { "../bridge/dist/worker.js": "bridge/dist/worker.js" } }
 }

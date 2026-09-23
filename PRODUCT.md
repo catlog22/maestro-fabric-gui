@@ -26,7 +26,7 @@ Local desktop use on the developer's own machine (Windows/macOS/Linux via Tauri 
 
 - React 19 + TypeScript + Vite frontend inside a Tauri WebView; no component library; plain CSS custom-property theming.
 - Bilingual EN / 简体中文; default follows system language. Theme: system / light / dark.
-- Confirmed product functions (must keep working): gateway lifecycle controls, profile connect/disconnect, sanitized live logs with cursor/gap recovery, workspace register/renew/bind/remove/unbind, Fabric device/endpoint/route control with revision-generation fencing, typed Gateway tools (Board, Host, Exec, Jobs, Files, Sessions, Todos, Teammates, Handoffs, Skills, Knowledge, Browser), connector and tunnel diagnostics.
+- Confirmed product functions (must keep working): gateway lifecycle controls, profile connect/disconnect, sanitized live logs with cursor/gap recovery, workspace register/renew/bind/remove/unbind, Fabric device/endpoint/route control with revision-generation fencing, typed Gateway tools (Board, Host, Exec, Jobs, Files, Sessions, Todos, Teammates, Handoffs, Skills, Knowledge, Browser), and tunnel diagnostics.
 - Explicit confirmations on high-risk actions are a product commitment, not a style choice.
 - Native file/folder picker via `tauri-plugin-dialog` is approved for path fields (workspace registration, Files tool).
 

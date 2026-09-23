@@ -1,0 +1,20 @@
+{
+  "schema_version": "transition-receipt/2.0",
+  "transition_id": "tr_456d11b1-3694-4c57-a358-9df9d8d5cadb",
+  "request_id": "req-session-complete-ui-1",
+  "session_id": "20260922-odyssey-ui-app",
+  "activity_revision": 5,
+  "target_type": "orchestration",
+  "target_id": "20260922-odyssey-ui-app",
+  "revision_before": 4,
+  "revision_after": 5,
+  "actor_id": "devin",
+  "participant_id": "devin",
+  "reason": "chain exhausted, all goals done",
+  "evidence_refs": [],
+  "recorded_at": "2026-09-22T13:51:38.314Z",
+  "result": {
+    "status": "completed",
+    "orchestration_revision": 5
+  }
+}

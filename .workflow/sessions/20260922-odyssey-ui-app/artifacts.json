@@ -1,6 +1,49 @@
 {
   "schema_version": "artifacts/1.0",
-  "revision": 0,
-  "artifacts": {},
-  "aliases": {}
+  "revision": 1,
+  "artifacts": {
+    "ART-dceec2759984b2eb61d3": {
+      "kind": "evidence",
+      "role": "evidence",
+      "producer_run_id": "run-6401c7fc128f",
+      "relative_path": "runs/run-6401c7fc128f/outputs/evidence.ndjson",
+      "media_type": "application/x-ndjson",
+      "schema_version": "evidence/1.0",
+      "content_hash": "6d4377bc7396e8f7952cdf554ece46bd0b4747fb5aeeeedcca7502dc776a4143",
+      "size": 10406,
+      "status": "sealed",
+      "derived_from": [],
+      "replaces": null
+    },
+    "ART-a5013e2f73db85d8a5bb": {
+      "kind": "ui-audit",
+      "role": "primary",
+      "producer_run_id": "run-6401c7fc128f",
+      "relative_path": "runs/run-6401c7fc128f/outputs/session.json",
+      "media_type": "application/json",
+      "schema_version": "ui-audit/1.0",
+      "content_hash": "dfe2649f941ea37cce702a1b562477fe6239772aacd7677a8171bb365d59f113",
+      "size": 4734,
+      "status": "sealed",
+      "derived_from": [],
+      "replaces": null
+    },
+    "ART-0edc9ea8e2d17d603ab9": {
+      "kind": "ui-audit-report",
+      "role": "attachment",
+      "producer_run_id": "run-6401c7fc128f",
+      "relative_path": "runs/run-6401c7fc128f/outputs/understanding.md",
+      "media_type": "text/markdown",
+      "schema_version": "ui-audit-report/1.0",
+      "content_hash": "0fbab33d9e4c55011585901f10826f7661c22a022de8fd0e7de83da38fcefeb6",
+      "size": 8061,
+      "status": "sealed",
+      "derived_from": [],
+      "replaces": null
+    }
+  },
+  "aliases": {
+    "ui-audit-session": "ART-a5013e2f73db85d8a5bb",
+    "ui-understanding": "ART-0edc9ea8e2d17d603ab9"
+  }
 }

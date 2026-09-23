@@ -3,9 +3,9 @@
   "session_id": "20260922-odyssey-ui-app",
   "objective": "深入优化当前 App 界面与交互逻辑",
   "definition_of_done": "UI audit across 6 dimensions completed, all actionable findings/ideas fixed and verified, typecheck/tests green, generalization + discovery triage done",
-  "status": "open",
-  "orchestration_revision": 3,
-  "activity_revision": 3,
+  "status": "completed",
+  "orchestration_revision": 5,
+  "activity_revision": 5,
   "chain": [
     {
       "step_id": "step-ui-1",
@@ -15,7 +15,7 @@
         "--mode ui",
         "-y"
       ],
-      "status": "running",
+      "status": "completed",
       "run_ids": [
         "run-6401c7fc128f"
       ],
@@ -26,13 +26,11 @@
     }
   ],
   "decisions": [],
-  "active_run_ids": [
-    "run-6401c7fc128f"
-  ],
+  "active_run_ids": [],
   "artifacts_ref": "artifacts.json",
   "evidence_ref": "evidence.json",
   "created_at": "2026-09-22T12:58:36.464Z",
-  "updated_at": "2026-09-22T12:58:50.486Z",
-  "completed_at": null,
+  "updated_at": "2026-09-22T13:51:38.314Z",
+  "completed_at": "2026-09-22T13:51:38.314Z",
   "archived_at": null
 }

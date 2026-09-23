@@ -2,9 +2,9 @@
   "schema_version": "run-knowledge-delta/1.0",
   "session_id": "20260922-odyssey-ui-app",
   "run_id": "run-6401c7fc128f",
-  "revision": 2,
+  "revision": 3,
   "created_at": "2026-09-22T13:49:49.216Z",
-  "updated_at": "2026-09-22T13:49:49.987Z",
+  "updated_at": "2026-09-22T13:51:17.327Z",
   "inputs": [],
   "candidates": [
     {
@@ -39,6 +39,63 @@
       "occurrences": 1,
       "first_recorded_at": "2026-09-22T13:49:49.987Z",
       "last_recorded_at": "2026-09-22T13:49:49.987Z",
+      "status": "pending",
+      "promoted_id": null,
+      "promotion_receipt": null
+    },
+    {
+      "candidate_id": "KDC-0acd2a63ab4f9f01",
+      "target": "spec",
+      "action": "propose",
+      "title": "Expose Fabric bind fencing generations as numeric inputs (default 1) instead of hardcoding",
+      "content": "Expose Fabric bind fencing generations as numeric inputs (default 1) instead of hardcoding",
+      "category": "arch",
+      "source_kind": "decision",
+      "evidence_refs": [
+        "run:run-6401c7fc128f",
+        "report.md#decision:0"
+      ],
+      "occurrences": 1,
+      "first_recorded_at": "2026-09-22T13:51:17.327Z",
+      "last_recorded_at": "2026-09-22T13:51:17.327Z",
+      "status": "pending",
+      "promoted_id": null,
+      "promotion_receipt": null
+    },
+    {
+      "candidate_id": "KDC-708e1c1ea7814edd",
+      "target": "spec",
+      "action": "propose",
+      "title": "Bind :root color/background to var(--text)/var(--canvas) so themes control inherited colors",
+      "content": "Bind :root color/background to var(--text)/var(--canvas) so themes control inherited colors",
+      "category": "arch",
+      "source_kind": "decision",
+      "evidence_refs": [
+        "run:run-6401c7fc128f",
+        "report.md#decision:1"
+      ],
+      "occurrences": 1,
+      "first_recorded_at": "2026-09-22T13:51:17.327Z",
+      "last_recorded_at": "2026-09-22T13:51:17.327Z",
+      "status": "pending",
+      "promoted_id": null,
+      "promotion_receipt": null
+    },
+    {
+      "candidate_id": "KDC-5f4cf49779cf4ee0",
+      "target": "spec",
+      "action": "propose",
+      "title": "Panels receive localized title via optional title prop; section stays the routing key",
+      "content": "Panels receive localized title via optional title prop; section stays the routing key",
+      "category": "arch",
+      "source_kind": "decision",
+      "evidence_refs": [
+        "run:run-6401c7fc128f",
+        "report.md#decision:2"
+      ],
+      "occurrences": 1,
+      "first_recorded_at": "2026-09-22T13:51:17.327Z",
+      "last_recorded_at": "2026-09-22T13:51:17.327Z",
       "status": "pending",
       "promoted_id": null,
       "promotion_receipt": null

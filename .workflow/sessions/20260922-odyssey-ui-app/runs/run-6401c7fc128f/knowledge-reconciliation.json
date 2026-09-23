@@ -1,0 +1,68 @@
+{
+  "schema_version": "knowledge-reconciliation/1.0",
+  "session_id": "20260922-odyssey-ui-app",
+  "run_id": "run-6401c7fc128f",
+  "candidate_snapshot_hash": "b1bdf31a743249eb52996184c060df4096b55ada6084e1b32c0acf70a2b946ab",
+  "corpus_fingerprint": "271b1216e6f5611184f63a45c2edb789125736d8cacea58739bd1219a35efd0e",
+  "matcher_revision": "semantic-delta/1.0",
+  "generated_at": "2026-09-22T13:51:17.205Z",
+  "retrieval": {
+    "mode": "lexical-kg",
+    "embedding_used": false,
+    "candidate_limit": 28,
+    "identity_documents": 0,
+    "semantic_documents": 0,
+    "relation_documents": 0
+  },
+  "counts": {
+    "candidates": 5,
+    "unique": 5,
+    "duplicates": 0,
+    "related": 0,
+    "conflicts": 0,
+    "review_required": 0,
+    "suppressed": 0
+  },
+  "candidates": [
+    {
+      "candidate_id": "KDC-0acd2a63ab4f9f01",
+      "disposition": "unique",
+      "promotion_eligibility": "eligible",
+      "canonical_id": null,
+      "matches": [],
+      "resolution": null
+    },
+    {
+      "candidate_id": "KDC-551944a5e0c97f99",
+      "disposition": "unique",
+      "promotion_eligibility": "eligible",
+      "canonical_id": null,
+      "matches": [],
+      "resolution": null
+    },
+    {
+      "candidate_id": "KDC-5f4cf49779cf4ee0",
+      "disposition": "unique",
+      "promotion_eligibility": "eligible",
+      "canonical_id": null,
+      "matches": [],
+      "resolution": null
+    },
+    {
+      "candidate_id": "KDC-708e1c1ea7814edd",
+      "disposition": "unique",
+      "promotion_eligibility": "eligible",
+      "canonical_id": null,
+      "matches": [],
+      "resolution": null
+    },
+    {
+      "candidate_id": "KDC-e57d742c0ac32ac2",
+      "disposition": "unique",
+      "promotion_eligibility": "eligible",
+      "canonical_id": null,
+      "matches": [],
+      "resolution": null
+    }
+  ]
+}

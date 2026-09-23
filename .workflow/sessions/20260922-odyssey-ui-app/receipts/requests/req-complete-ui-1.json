@@ -1,0 +1,7 @@
+{
+  "schema_version": "request-receipt/2.0",
+  "request_id": "req-complete-ui-1",
+  "participant_id": "devin",
+  "payload_hash": "sha256:5d7d2e212f46019aea09c93a6e98659ad4bfc3a4cb55f855589d6dd98c483c21",
+  "transition_receipt_ref": "receipts/transitions/000000000004-tr_46e4bfe5-90d4-4fe9-95bc-8839c605b5ea.json"
+}

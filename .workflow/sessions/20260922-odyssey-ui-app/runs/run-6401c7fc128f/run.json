@@ -14,16 +14,20 @@
   ],
   "command_contract_hash": "sha256:2d749b81e331da30077d9715162c0fee92173782e4eb209d7a1e715960f28896",
   "goal": null,
-  "status": "running",
-  "revision": 1,
+  "status": "sealed",
+  "revision": 2,
   "actor_id": "devin",
   "input_refs": [],
-  "output_refs": [],
-  "primary_artifact_id": null,
-  "verdict": null,
-  "summary": null,
+  "output_refs": [
+    "ART-dceec2759984b2eb61d3",
+    "ART-a5013e2f73db85d8a5bb",
+    "ART-0edc9ea8e2d17d603ab9"
+  ],
+  "primary_artifact_id": "ART-a5013e2f73db85d8a5bb",
+  "verdict": "done",
+  "summary": "UI odyssey complete: 19 findings fixed across 6 dimensions, verified in browser",
   "created_at": "2026-09-22T12:58:50.450Z",
   "started_at": "2026-09-22T12:58:50.486Z",
-  "ended_at": null,
-  "sealed_at": null
+  "ended_at": "2026-09-22T13:51:17.207Z",
+  "sealed_at": "2026-09-22T13:51:17.207Z"
 }

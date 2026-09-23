@@ -11,9 +11,9 @@
     "verify:release": "node scripts/verify-release-version.mjs",
     "build:bridge": "node scripts/build-bridge.mjs",
     "typecheck": "tsc -b --pretty false && tsc -p bridge/tsconfig.json --noEmit",
-    "test": "vitest run && node --test bridge/test/*.test.mjs",
+    "test": "vitest run && npm run test:bridge",
     "test:ui": "vitest run",
-    "test:bridge": "node --test bridge/test/*.test.mjs",
+    "test:bridge": "npm run build:bridge && node --test bridge/test/*.test.mjs",
     "tauri": "tauri"
   },
   "dependencies": {
